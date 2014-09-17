@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Stack;
+
 
 public class SinglyLL_Github {
 	
@@ -9,6 +12,7 @@ public class SinglyLL_Github {
 		head = null;
 	}
 	
+	// Insert at start
 	public void insertAtStart(int n)
 	{
 		LinkNode node = new LinkNode();
@@ -22,9 +26,11 @@ public class SinglyLL_Github {
 			node.setData(n);
 			node.setNext(head);
 			head = node;
+			//head.getNext().setNext(head); // use this condition to create loop
 		}
 	}
 	
+	// Insert node after kth position
 	public void insertAfterNodek(int k, int n)
 	{
 		LinkNode curr = new LinkNode();
@@ -49,6 +55,8 @@ public class SinglyLL_Github {
 		}
 	}
 	
+	
+	//insert at end
 	public void insertAtEnd(int n)
 	{
 		LinkNode curr = new LinkNode();
@@ -70,6 +78,7 @@ public class SinglyLL_Github {
 		}
 	}
 	
+	//Delete node	
 	public void delete(int n)
 	{
 		LinkNode curr = new LinkNode();
@@ -100,6 +109,7 @@ public class SinglyLL_Github {
 		}
 	}
 	
+	// Print kth Node	
 	public void getkthNode(int k)
 	{
 		LinkNode curr = new LinkNode();
@@ -129,7 +139,7 @@ public class SinglyLL_Github {
 		
 	}
 	
-	
+	// Print center node	
 	public void printCenterNode()
 	{
 		LinkNode fast = new LinkNode();
@@ -152,7 +162,7 @@ public class SinglyLL_Github {
 		System.out.println("center : " + slow.getData());
 	}
 	
-	
+	//Print nth node from end	
 	public void printNthNodefromEnd(int n)
 	{
 		LinkNode p1 = new LinkNode();
@@ -175,6 +185,7 @@ public class SinglyLL_Github {
 		System.out.println("data : " + p1.getData());
 	}
 	
+	// Count the specific value in LL	
 	public void printCount(int n)
 	{
 		LinkNode curr;
@@ -197,6 +208,7 @@ public class SinglyLL_Github {
 		System.out.println("Data : " + c);
 	}
 	
+	// reverse LL
 	public void reverse()
 	{
 		LinkNode curr = null;
@@ -221,6 +233,137 @@ public class SinglyLL_Github {
 		}
 	}
 	
+	
+	//Detect loop in LL using hashmap
+	public void detectLoop()
+	{
+		System.out.println("detect");
+		LinkNode curr = new LinkNode();
+		HashMap<LinkNode, Integer> hm = new HashMap<LinkNode, Integer>();
+		if(head == null)
+		{
+			System.out.println("Empty list");
+		}
+		else
+		{
+			curr = head;
+			while(curr!=null)
+			{
+				if(hm.containsKey(curr))
+				{
+					System.out.println("LOOP");
+					break;
+				}
+				else
+				{
+					hm.put(curr, 1);
+					curr = curr.getNext();
+				}
+				
+			}
+			
+		}
+	}
+	
+	// detect loop using pointers
+	public void detectUsingPointers()
+	{
+		LinkNode slow = head;
+		LinkNode fast = head;
+		while(slow!=null && fast!=null && fast.getNext() != null)
+		{
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+			if(slow.equals(fast))
+			{
+				System.out.println("LOOP");
+				break;
+			}
+					
+		}
+	}
+	
+	//check for palindrome using stack
+	public void palindrome()
+	{
+		Stack<LinkNode> st = new Stack<LinkNode>();
+		LinkNode curr = new LinkNode();
+		boolean flag = false;
+		curr = head;
+		while(curr != null)
+		{
+			st.push(curr);
+			curr = curr.getNext();
+		}
+		
+		curr = head;
+		while(!st.isEmpty())
+		{
+			LinkNode node = st.pop();
+			System.out.println("stack : " + node.getData());
+			System.out.println("curr : " + curr.getData());
+			if(curr.getData() == node.getData())
+			{
+				flag = true;
+			}
+			else
+			{
+				flag = false;
+				break;
+			}
+			curr = curr.getNext();
+					
+		}
+		
+		if(flag == true)
+		{
+			System.out.println("Palindrome");
+		}
+		else
+		{
+			System.out.println("Not palindrome");
+		}
+		
+	}
+	
+	
+	//palindrome by reversing
+	public void palindrome_reverse()
+	{
+		
+	}
+	
+	//insert in sorted LL
+	public void insertInSorted(int n)
+	{
+		LinkNode curr = new LinkNode();		
+		LinkNode node = new LinkNode();
+		node.setData(n);
+		if(head == null)
+		{
+			head = new LinkNode(n);
+		}
+		else if(head.getData() > n)
+		{
+			node.setNext(head);
+			head = node;
+		}
+		
+		else
+		{
+			curr = head;
+			while(curr.getNext() != null && curr.getNext().getData() < n)
+			{
+				curr = curr.getNext();
+			}
+			node.setNext(curr.getNext());
+			curr.setNext(node);
+		}
+		
+		
+	}
+	
+	// print LL	
 	public void print()
 	{
 		print(head);
