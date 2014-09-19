@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Stack;
 
 
@@ -359,8 +360,79 @@ public class SinglyLL_Github {
 			node.setNext(curr.getNext());
 			curr.setNext(node);
 		}
+	}
+	
+	//print reverse recursively -- > not working
+	public void reverseRecursive()
+	{
+		System.out.println("Recursive reverse");
+		reverseRecursive(head);
+	}
+	
+	public void reverseRecursive(LinkNode node)
+	{
+		if(node == null)
+		{
+			System.out.println("Empty");
+		}		
+		reverseRecursive(node.getNext());
+		System.out.println(node.getData());
+	}
+	
+	//remove duplicates from sorted list
+	public void removeDuplicatesSorted()
+	{
+		LinkNode curr = new LinkNode();
 		
-		
+		if(head == null)
+		{
+			System.out.println("Empty");
+		}
+		else
+		{
+			curr = head;
+			while(curr.getNext() != null)
+			{
+				if(curr.getData() == curr.getNext().getData())
+				{
+					curr.setNext(curr.getNext().getNext());
+				}
+				else
+				{
+					curr = curr.getNext();
+				}
+				
+			}
+		}
+	}
+	
+	public void removeDuplicatesUnsorted()
+	{
+		LinkNode curr = new LinkNode();
+	    HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+	    
+		if(head == null)
+		{
+			System.out.println("Empty");
+			
+		}
+		else
+		{
+			curr = head;	
+			while(curr != null)
+			{
+				if(hm.containsKey(curr.getData()))
+				{
+					System.out.println("duplicate : " + curr.getData());
+				}
+				else
+				{
+					hm.put(curr.getData(), 1);
+					System.out.println("non duplicate : " + curr.getData());
+					curr = curr.getNext();
+				}
+			}
+		}
 	}
 	
 	// print LL	
