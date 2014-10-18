@@ -5,7 +5,7 @@ public class StringPermutation {
 	    permutation("", str); 
 	}
 
-	private void permutation(String prefix, String str) 
+	public void permutation(String prefix, String str) 
 	{
 	    int n = str.length();
 	    if (n == 0) 
